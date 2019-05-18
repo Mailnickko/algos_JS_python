@@ -23,3 +23,28 @@ const twoNumSum = (arr, target) => {
 };
 
 console.log(twoNumSum([3, 5, -4, 8, 11, 1, -1, 6], 10));
+
+const twoNumSumBinSearch = (arr, target) => {
+  // sanity check
+  if (!Array.isArray(arr) || !arr.length || !target) {
+    return [];
+  }
+
+  const sorted = [...arr].sort((a, b) => a - b);
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left < right) {
+    let sum = sorted[left] + sorted[right];
+    if (sum < target) {
+      left++;
+    } else if (sum > target) {
+      right--;
+    } else {
+      return [sorted[left], sorted[right]];
+    }
+  }
+  return [];
+};
+
+console.log(twoNumSumBinSearch([3, 5, -4, 8, 11, 1, -1, 6], 10));
